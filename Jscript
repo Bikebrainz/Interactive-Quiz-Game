@@ -1,0 +1,39 @@
+let questions = [
+    { question: "Question 1", options: ["Option1", "Option2"], answer: "Option1" },
+    // ... more questions
+];
+let currentQuestion = 0;
+
+function displayQuestion() {
+    // Assuming you have an element to display the question and options
+    let questionElement = document.getElementById('question');
+    let optionsElement = document.getElementById('options');
+
+    questionElement.textContent = questions[currentQuestion].question;
+    optionsElement.innerHTML = '';
+
+    questions[currentQuestion].options.forEach(option => {
+        let button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = () => checkAnswer(option);
+        optionsElement.appendChild(button);
+    });
+}
+
+function checkAnswer(selectedOption) {
+    let correct = questions[currentQuestion].answer === selectedOption;
+    // Display if the answer is correct
+    alert(correct ? "Correct!" : "Wrong!");
+
+    // Move to the next question
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+    } else {
+        alert("Quiz completed!");
+        // Optionally, reset the quiz or display results
+    }
+}
+
+// Initial call to display the first question
+displayQuestion();
